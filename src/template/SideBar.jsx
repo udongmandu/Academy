@@ -45,14 +45,14 @@ export default function SideBar() {
             key={index}
           >
             <h1
-              className="baemin text-2xl font-bold w-full text-left py-3 border-y-2 px-5"
+              className="text-2xl font-bold w-full text-left py-3 border-y-2 px-5"
               style={{ userSelect: "none" }}
             >
               {menu[0].name}
             </h1>
             {menu.slice(1).map((item, itemIndex) => (
               <a
-                className="baemin text-right py-1 px-7"
+                className="text-right py-1 px-7"
                 key={itemIndex}
                 href={item.href}
               >

@@ -5,7 +5,7 @@ export default function Button(props) {
 
   return (
     <button className={styleClass} onClick={onClick} disabled={disabled}>
-      <span className="baemin font-extrabold">{label}</span>
+      <span className="font-extrabold">{label}</span>
     </button>
   );
 }
