@@ -11,7 +11,7 @@ export default function Consist() {
     <BrowserRouter>
       <div className="w-full h-full flex flex-col">
         <Topbar />
-        <div className="flex h-full bg-[#FCF5ED]">
+        <div className="flex h-full bg-[#FAFBFE]">
           <SideBar />
           <Routes>
             <Route path="/" element={<TestPage />} />

@@ -16,47 +16,49 @@ export default function DataTableV1(props) {
 
   return (
     <div className="w-full p-10">
-      <table
-        className={`${styleClass} border border-[#B3A492] rounded-md text-sm shadow-md w-full `}
-      >
-        <caption className="text-left font-extrabold">
-          {title} | 전체 : {totalNumber}
-        </caption>
-        <thead className="text-base font-semibold">
-          <tr className="border-b border-[#B3A492]">
-            {columns.map((column, index) => (
-              <td className="px-2" key={index}>
-                {column.columnName}
-              </td>
-            ))}
-          </tr>
-        </thead>
-        {totalNumber > 0 ? (
-          <tbody className="px-3">
-            {currentPageData.map((item, index) => (
-              <tr key={startIndex + index}>
-                {columns.map((column, columnIndex) => {
-                  if (column.data === "no") {
-                    return (
-                      <td className="py-2 px-2" key={columnIndex}>
-                        {startIndex + index + 1}
-                      </td>
-                    );
-                  } else {
-                    return (
-                      <td className="py-2 px-2" key={columnIndex}>
-                        {item[column.data]}
-                      </td>
-                    );
-                  }
-                })}
-              </tr>
-            ))}
-          </tbody>
-        ) : (
-          "데이터가 존재하지 않습니다."
-        )}
-      </table>
+      <div className="border border-[#B3A492] rounded-md">
+        <table
+          className={`${styleClass} border-collapse rounded-md text-sm shadow-md w-full fontA `}
+        >
+          <caption className="text-left font-extrabold px-3 text-lg">
+            {title} | <span className="text-sm"> 전체 : {totalNumber}</span>
+          </caption>
+          <thead className="text-base font-semibold">
+            <tr className="border-b border-[#B3A492]">
+              {columns.map((column, index) => (
+                <td className="px-2" key={index}>
+                  {column.columnName}
+                </td>
+              ))}
+            </tr>
+          </thead>
+          {totalNumber > 0 ? (
+            <tbody className="px-3">
+              {currentPageData.map((item, index) => (
+                <tr key={startIndex + index}>
+                  {columns.map((column, columnIndex) => {
+                    if (column.data === "no") {
+                      return (
+                        <td className="py-2 px-2" key={columnIndex}>
+                          {startIndex + index + 1}
+                        </td>
+                      );
+                    } else {
+                      return (
+                        <td className="py-2 px-2" key={columnIndex}>
+                          {item[column.data]}
+                        </td>
+                      );
+                    }
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            "데이터가 존재하지 않습니다."
+          )}
+        </table>
+      </div>
       <div className="flex justify-end mt-2">
         {currentPage > 1 && (
           <>

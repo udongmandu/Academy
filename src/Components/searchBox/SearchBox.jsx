@@ -21,7 +21,7 @@ export default function SearchBox(props) {
   };
 
   return (
-    <div className="w-full p-10">
+    <div className="w-full p-10 fontA">
       <div className="w-full h-40 border border-[#B3A492] shadow-md rounded-md p-5">
         <form
           className="flex gap-4 w-full flex-col"

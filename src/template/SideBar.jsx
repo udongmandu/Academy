@@ -17,26 +17,30 @@ export default function SideBar() {
   }, [location.pathname]);
 
   return (
-    <div className="relative w-96 h-full min-w-[200px]">
+    <div className="relative w-96 h-full min-w-[200px] fontA">
       <div className="h-full">
         {sideMenus.map((menu, index) => (
           <div
             className={`h-44 flex flex-col ${
               menu === activeMenuItem
-                ? "border-r-4 border-green-500 rounded-r-xl"
+                ? "border-r-4 border-[#5272F2] rounded-r-xl"
                 : "border-r-4 rounded-r-xl"
             }`}
             key={index}
           >
             <h1
-              className="text-2xl font-bold w-full text-left py-3 border-y-2 px-10"
+              className="text-2xl font-bold w-full text-left py-3 border-b-2 px-10"
               style={{ userSelect: "none" }}
             >
               {menu.title}
             </h1>
             {menu.menus.map((item, itemIndex) => (
               <a
-                className="text-right py-1 px-7"
+                className={`text-right py-1 px-7 ${
+                  item.href === location.pathname
+                    ? "bg-[#5272F2] text-white"
+                    : ""
+                }`}
                 key={itemIndex}
                 href={item.href}
               >
