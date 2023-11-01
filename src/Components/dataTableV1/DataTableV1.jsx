@@ -1,0 +1,121 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+export default function DataTableV1(props) {
+  const { styleClass, datas, columns, title } = props;
+  const [currentPage, setCurrentPage] = React.useState(1);
+  //페이지당 보일 데이터 갯수
+  const totalNumber = datas.length;
+  const itemsPerPage = 10;
+
+  const totalPages = Math.ceil(totalNumber / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentPageData = datas.slice(startIndex, endIndex);
+
+  return (
+    <div className="w-full p-10 overflow-x-auto">
+      <table
+        className={`${styleClass} border text-sm shadow-md w-full border-collapse rounded-md overflow-hidden border-[#B3A492]`}
+      >
+        <caption className="text-left font-extrabold">
+          {title} | 전체 : {totalNumber}
+        </caption>
+        <thead className="text-base font-semibold">
+          <tr>
+            {columns.map((column, index) => (
+              <td key={index}>{column.columnName}</td>
+            ))}
+          </tr>
+        </thead>
+        {totalNumber > 0 ? (
+          <tbody className="px-3">
+            {currentPageData.map((item, index) => (
+              <tr key={startIndex + index}>
+                {columns.map((column, columnIndex) => {
+                  if (column.data === "no") {
+                    return (
+                      <td className="py-2" key={columnIndex}>
+                        {startIndex + index + 1}
+                      </td>
+                    );
+                  } else {
+                    return (
+                      <td className="py-2" key={columnIndex}>
+                        {item[column.data]}
+                      </td>
+                    );
+                  }
+                })}
+              </tr>
+            ))}
+          </tbody>
+        ) : (
+          "데이터가 존재하지 않습니다."
+        )}
+      </table>
+      <div className="flex justify-end mt-2">
+        {currentPage > 1 && (
+          <>
+            <button
+              onClick={() => setCurrentPage(1)}
+              className={`px-2 rounded-lg border bg-white`}
+            >
+              {"<<"}
+            </button>
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              className={`px-2 rounded-lg border bg-white`}
+            >
+              {"<"}
+            </button>
+          </>
+        )}
+        {Array.from({ length: totalPages }, (_, index) => {
+          const pageNumber = index + 1;
+          if (Math.abs(currentPage - pageNumber) <= 2) {
+            return (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(pageNumber)}
+                className={`px-2 mx-1 rounded-lg border text-xs ${
+                  currentPage === pageNumber
+                    ? "bg-gray-500 text-white"
+                    : "bg-white"
+                }`}
+              >
+                {pageNumber}
+              </button>
+            );
+          } else {
+            return null;
+          }
+        })}
+        {currentPage < totalPages && (
+          <>
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              className={`px-2 rounded-lg border bg-white`}
+            >
+              {">"}
+            </button>
+            <button
+              onClick={() => setCurrentPage(totalPages)}
+              className={`px-2 rounded-lg border bg-white`}
+            >
+              {">>"}
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+DataTableV1.propTypes = {
+  title: PropTypes.string.isRequired,
+  datas: PropTypes.array,
+  styleClass: PropTypes.string,
+  columns: PropTypes.node.isRequired,
+};
