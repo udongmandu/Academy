@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 export default function DataTableV1(props) {
   const { styleClass, datas, columns, title } = props;
   const [currentPage, setCurrentPage] = React.useState(1);
-  //페이지당 보일 데이터 갯수
   const totalNumber = datas.length;
+  //페이지당 보일 데이터 갯수 나중에 고를 수 있도록 수정할지도
   const itemsPerPage = 10;
 
   const totalPages = Math.ceil(totalNumber / itemsPerPage);
@@ -15,17 +15,19 @@ export default function DataTableV1(props) {
   const currentPageData = datas.slice(startIndex, endIndex);
 
   return (
-    <div className="w-full p-10 overflow-x-auto">
+    <div className="w-full p-10">
       <table
-        className={`${styleClass} border text-sm shadow-md w-full border-collapse rounded-md overflow-hidden border-[#B3A492]`}
+        className={`${styleClass} border border-[#B3A492] rounded-md text-sm shadow-md w-full `}
       >
         <caption className="text-left font-extrabold">
           {title} | 전체 : {totalNumber}
         </caption>
         <thead className="text-base font-semibold">
-          <tr>
+          <tr className="border-b border-[#B3A492]">
             {columns.map((column, index) => (
-              <td key={index}>{column.columnName}</td>
+              <td className="px-2" key={index}>
+                {column.columnName}
+              </td>
             ))}
           </tr>
         </thead>
@@ -36,13 +38,13 @@ export default function DataTableV1(props) {
                 {columns.map((column, columnIndex) => {
                   if (column.data === "no") {
                     return (
-                      <td className="py-2" key={columnIndex}>
+                      <td className="py-2 px-2" key={columnIndex}>
                         {startIndex + index + 1}
                       </td>
                     );
                   } else {
                     return (
-                      <td className="py-2" key={columnIndex}>
+                      <td className="py-2 px-2" key={columnIndex}>
                         {item[column.data]}
                       </td>
                     );
@@ -117,5 +119,5 @@ DataTableV1.propTypes = {
   title: PropTypes.string.isRequired,
   datas: PropTypes.array,
   styleClass: PropTypes.string,
-  columns: PropTypes.node.isRequired,
+  columns: PropTypes.array.isRequired,
 };
