@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { SEARCH_STUDENT } from "../../constants/searchFilter";
 import { useState } from "react";
+import Button from "../ButtonTop";
 
 export default function SearchBox(props) {
   const { onSubmit, option } = props;
@@ -15,11 +16,15 @@ export default function SearchBox(props) {
     });
   };
 
+  const resetTextField = (e) => {
+    e.preventDefault();
+    document.querySelector("#text-field").value = "";
+  };
+
   const filterOption = (option) => {
     if (option === "student") return SEARCH_STUDENT;
     else return false;
   };
-
   return (
     <div className="w-full p-10 fontA">
       <div className="w-full h-40 border border-[#B3A492] shadow-md rounded-md p-5">
@@ -42,19 +47,20 @@ export default function SearchBox(props) {
             <input
               className="px-2 w-full h-11 rounded-md border border-[#B3A492]"
               name="nameText"
-              placeholder="이름을 검색하여 찾아보세요."
+              id="text-field"
+              placeholder={`검색기능을 이용하실 수 있습니다.`}
             />
           </div>
           <div className="mt-auto flex justify-end items-end gap-3">
             <div className="flex justify-center w-full border border-green-300 h-full">
               추가예정
             </div>
-            <button className="text-xs w-16 h-10 px-2 rounded-md border bg-gray-500 text-white">
-              초기화
-            </button>
-            <button className="text-xs w-16 h-10 px-2 rounded-md border bg-gray-500 text-white">
+            <button className="text-xs w-16 h-10 px-2 rounded-md border bg-[#5272F2] text-white">
               검색
             </button>
+            <Button onClick={resetTextField} label={"초기화"}>
+              초기화
+            </Button>
           </div>
         </form>
       </div>

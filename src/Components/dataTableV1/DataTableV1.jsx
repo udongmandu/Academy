@@ -15,7 +15,7 @@ export default function DataTableV1(props) {
   const currentPageData = datas.slice(startIndex, endIndex);
 
   return (
-    <div className="w-full p-10">
+    <div className="w-full p-10 pt-0">
       <div className="border border-[#B3A492] rounded-md">
         <table
           className={`${styleClass} border-collapse rounded-md text-sm shadow-md w-full fontA `}
@@ -85,7 +85,7 @@ export default function DataTableV1(props) {
                 onClick={() => setCurrentPage(pageNumber)}
                 className={`px-2 mx-1 rounded-lg border text-xs ${
                   currentPage === pageNumber
-                    ? "bg-gray-500 text-white"
+                    ? "bg-[#5272F2] text-white"
                     : "bg-white"
                 }`}
               >

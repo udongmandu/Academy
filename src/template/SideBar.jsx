@@ -23,8 +23,8 @@ export default function SideBar() {
           <div
             className={`h-44 flex flex-col ${
               menu === activeMenuItem
-                ? "border-r-4 border-[#5272F2] rounded-r-xl"
-                : "border-r-4 rounded-r-xl"
+                ? "border-r-4 border-[#5272F2] rounded-r-sm"
+                : "border-r-4 rounded-r-sm"
             }`}
             key={index}
           >

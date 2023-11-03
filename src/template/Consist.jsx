@@ -2,8 +2,9 @@ import React from "react";
 import "../style/index.css";
 import SideBar from "./SideBar";
 import Topbar from "./Topbar";
-import TestPage from "../pages/test";
-import Product from "../pages/product";
+import MainPage from "../pages/student/main";
+import LoginPage from "../pages/login/signIn";
+import Product from "../pages/student/product";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function Consist() {
@@ -13,10 +14,13 @@ export default function Consist() {
         <Topbar />
         <div className="flex h-full bg-[#FAFBFE]">
           <SideBar />
-          <Routes>
-            <Route path="/" element={<TestPage />} />
-            <Route path="/product" element={<Product />} />
-          </Routes>
+          <div className="w-full">
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/sign-in" element={<LoginPage />} />
+            </Routes>
+          </div>
         </div>
       </div>
     </BrowserRouter>
