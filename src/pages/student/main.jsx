@@ -49,7 +49,7 @@ export default function MainPage() {
           </>
         ) : null}
       </div>
-      <div className="w-full justify-center flex px-10 pt-12">
+      <div className="w-full justify-center flex px-10 py-12">
         <div className="min-w-[45vw] max-w-[800px] border-4 rounded-md shadow-2xl border-[#5272F2] px-10">
           <SearchBox onSubmit={setSearch} option={"student"}></SearchBox>
           <DataTableV1

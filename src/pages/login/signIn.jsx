@@ -12,9 +12,7 @@ export default function LoginPage() {
             <Button
               label={"X"}
               width={50}
-              onClick={() => {
-                window.history.back();
-              }}
+              URL={"/"}
               bgColor={"5272F2"}
             ></Button>
           </div>
