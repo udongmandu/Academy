@@ -36,7 +36,7 @@ export default function SideBar() {
             </h1>
             {menu.menus.map((item, itemIndex) => (
               <a
-                className={`text-right py-1 px-7 ${
+                className={`text-right font-extrabold py-1 px-7 ${
                   item.href === location.pathname
                     ? "bg-[#5272F2] text-white"
                     : ""
