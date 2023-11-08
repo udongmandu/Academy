@@ -6,7 +6,12 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function MainPage() {
-  const [search, setSearch] = useState({ text: "", option: "student" });
+  const [search, setSearch] = useState({
+    text: "",
+    option: "student",
+    startDate: "",
+    endDate: "",
+  });
   console.log(search);
   //페이지 타이틀과 페이지 명 가져오기
   const location = useLocation();
