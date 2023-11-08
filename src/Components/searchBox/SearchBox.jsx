@@ -1,24 +1,33 @@
 import React from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
 import { SEARCH_STUDENT } from "../../constants/searchFilter";
 import { useState } from "react";
 import Button from "../ButtonTop";
+import DatePickerV1 from "../datePicker/DatePicker";
 
 export default function SearchBox(props) {
+  const today = new Date();
   const { onSubmit, option } = props;
   const [searchOption, setSearchOption] = useState("name");
+  const [startDate, setStartDate] = useState(today);
+  const [endDate, setEndDate] = useState(today);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({
       text: e.target.elements["nameText"].value,
       option: searchOption,
+      startDate,
+      endDate,
     });
   };
 
-  const resetTextField = (e) => {
+  const resetField = (e) => {
     e.preventDefault();
     document.querySelector("#text-field").value = "";
+    setStartDate(today);
+    setEndDate(today);
   };
 
   const filterOption = (option) => {
@@ -51,14 +60,23 @@ export default function SearchBox(props) {
               placeholder={`검색기능을 이용하실 수 있습니다.`}
             />
           </div>
-          <div className="mt-auto flex justify-end items-end gap-3">
-            <div className="flex justify-center w-full border border-green-300 h-full">
-              추가예정
+          <div className="mt-3 flex justify-end items-center gap-3 w-full">
+            <div className="flex justify-center w-full h-full items-center">
+              <span className="fontA text-lg">날짜 : </span>
+              <DatePickerV1
+                selected={startDate}
+                onChange={(e) => setStartDate(e)}
+              />
+              <span className="px-10">~</span>
+              <DatePickerV1
+                selected={endDate}
+                onChange={(e) => setEndDate(e)}
+              />
             </div>
             <button className="text-xs w-16 h-10 px-2 rounded-md border bg-[#5272F2] text-white">
               검색
             </button>
-            <Button onClick={resetTextField} label={"초기화"}>
+            <Button onClick={resetField} label={"초기화"}>
               초기화
             </Button>
           </div>
