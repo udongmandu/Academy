@@ -1,3 +1,4 @@
+//사이드 메뉴 종류
 export const sideMenus = [
   {
     title: "학생관리",
