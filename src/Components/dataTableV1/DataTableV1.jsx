@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import moreIcon from "../../img/pending-icon.png";
 
 export default function DataTableV1(props) {
   const { styleClass, datas, columns, title } = props;
   const [currentPage, setCurrentPage] = React.useState(1);
   const totalNumber = datas.length;
+
+  //자세히 보기 기능
+  const [expandedRowIndex, setExpandedRowIndex] = useState(-1);
+
   //페이지당 보일 데이터 갯수 나중에 고를 수 있도록 수정할지도
   const itemsPerPage = 10;
 
@@ -14,8 +19,41 @@ export default function DataTableV1(props) {
   const endIndex = startIndex + itemsPerPage;
   const currentPageData = datas.slice(startIndex, endIndex);
 
+  //테이블 내의 '자세히 보기' 버튼 뜨도록 하는 기능 -------
+  const toggleRowExpansion = (index) => {
+    if (expandedRowIndex === index) {
+      setExpandedRowIndex(-1);
+    } else {
+      setExpandedRowIndex(index);
+    }
+  };
+
+  const closeExpandedRow = () => {
+    setExpandedRowIndex(-1);
+  };
+
+  const tableRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (tableRef.current && !tableRef.current.contains(event.target)) {
+        closeExpandedRow();
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  function buttonEffect(index) {
+    console.log(index);
+  }
+  // -------
   return (
-    <div className="w-full p-10 pt-0">
+    <div ref={tableRef} className="w-full p-10 pt-0">
       <div className="border border-[#B3A492] rounded-md">
         <table
           className={`${styleClass} border-collapse rounded-md text-sm shadow-md w-full fontA `}
@@ -35,23 +73,44 @@ export default function DataTableV1(props) {
           {totalNumber > 0 ? (
             <tbody className="px-3">
               {currentPageData.map((item, index) => (
-                <tr key={startIndex + index}>
-                  {columns.map((column, columnIndex) => {
-                    if (column.data === "no") {
-                      return (
-                        <td className="py-2 px-2" key={columnIndex}>
-                          {startIndex + index + 1}
-                        </td>
-                      );
-                    } else {
-                      return (
-                        <td className="py-2 px-2" key={columnIndex}>
-                          {item[column.data]}
-                        </td>
-                      );
-                    }
-                  })}
-                </tr>
+                <React.Fragment key={startIndex + index}>
+                  <tr className="relative">
+                    {columns.map((column, columnIndex) => {
+                      if (column.data === "no") {
+                        return (
+                          <td className="py-2 px-2" key={columnIndex}>
+                            {startIndex + index + 1}
+                          </td>
+                        );
+                      } else {
+                        return (
+                          <td className="py-2 px-2" key={columnIndex}>
+                            {item[column.data]}
+                          </td>
+                        );
+                      }
+                    })}
+                    <td className="absolute right-0 top-[6px]">
+                      <button
+                        className="relative"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleRowExpansion(index);
+                        }}
+                      >
+                        <img src={moreIcon} alt="" />
+                        {expandedRowIndex === index && (
+                          <span
+                            className="absolute top-[-24px] left-[50%] transform translate-x-[-50%] bg-white px-2 py-1 border rounded w-32"
+                            onClick={() => buttonEffect(index + 1)}
+                          >
+                            자세히 보기
+                          </span>
+                        )}
+                      </button>
+                    </td>
+                  </tr>
+                </React.Fragment>
               ))}
             </tbody>
           ) : (
