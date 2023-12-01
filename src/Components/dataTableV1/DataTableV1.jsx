@@ -79,13 +79,13 @@ export default function DataTableV1(props) {
                     {columns.map((column, columnIndex) => {
                       if (column.data === "no") {
                         return (
-                          <td className="py-2 px-2" key={columnIndex}>
+                          <td className="py-2 px-2 border-b" key={columnIndex}>
                             {startIndex + index + 1}
                           </td>
                         );
                       } else {
                         return (
-                          <td className="py-2 px-2" key={columnIndex}>
+                          <td className="py-2 px-2 border-b" key={columnIndex}>
                             {item[column.data]}
                           </td>
                         );
@@ -119,54 +119,56 @@ export default function DataTableV1(props) {
           )}
         </table>
       </div>
-      <div className="flex justify-end mt-2">
+      <div className="flex justify-end mt-2 relative items-center">
         {currentPage > 1 && (
           <>
             <button
               onClick={() => setCurrentPage(1)}
-              className={`px-2 rounded-lg border bg-white`}
+              className={`px-2 rounded-lg border bg-white absolute right-56 select-none`}
             >
               {"<<"}
             </button>
             <button
               onClick={() => setCurrentPage(currentPage - 1)}
-              className={`px-2 rounded-lg border bg-white`}
+              className={`px-2 rounded-lg border bg-white absolute right-48 select-none`}
             >
               {"<"}
             </button>
           </>
         )}
-        {Array.from({ length: totalPages }, (_, index) => {
-          const pageNumber = index + 1;
-          if (Math.abs(currentPage - pageNumber) <= 2) {
-            return (
-              <button
-                key={index}
-                onClick={() => setCurrentPage(pageNumber)}
-                className={`px-2 mx-1 rounded-lg border text-xs ${
-                  currentPage === pageNumber
-                    ? "bg-[#5272F2] text-white"
-                    : "bg-white"
-                }`}
-              >
-                {pageNumber}
-              </button>
-            );
-          } else {
-            return null;
-          }
-        })}
+        <div className="pr-[80px]">
+          {Array.from({ length: totalPages }, (_, index) => {
+            const pageNumber = index + 1;
+            if (Math.abs(currentPage - pageNumber) <= 2) {
+              return (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(pageNumber)}
+                  className={`px-2 mx-1 rounded-lg border text-xs h-7 w-7 select-none ${
+                    currentPage === pageNumber
+                      ? "bg-[#5272F2] text-white"
+                      : "bg-white"
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              );
+            } else {
+              return null;
+            }
+          })}
+        </div>
         {currentPage < totalPages && (
           <>
             <button
               onClick={() => setCurrentPage(currentPage + 1)}
-              className={`px-2 rounded-lg border bg-white`}
+              className={`px-2 rounded-lg border bg-white absolute right-11 select-none`}
             >
               {">"}
             </button>
             <button
               onClick={() => setCurrentPage(totalPages)}
-              className={`px-2 rounded-lg border bg-white`}
+              className={`px-2 rounded-lg border bg-white absolute right-0 select-none`}
             >
               {">>"}
             </button>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../style/index.css";
 import Button from "../Components/ButtonTop";
+import LOGO from "../img/logoEX.png";
 
 export default function Topbar() {
   const [user, setUser] = useState(null);
@@ -19,7 +20,14 @@ export default function Topbar() {
 
   return (
     <div className="w-full h-24 flex items-center justify-between px-16 bg-[#F3F4F6] border-b-2 text-slate-500">
-      <img className="w-48 h-12" src="" alt="" />
+      <img
+        className="w-52 cursor-pointer"
+        src={LOGO}
+        alt=""
+        onClick={() => {
+          window.location.href = "/student";
+        }}
+      />
       {!user ? (
         <Button
           URL="/sign-in"
