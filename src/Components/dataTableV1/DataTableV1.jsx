@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import moreIcon from "../../img/pending-icon.png";
 
 export default function DataTableV1(props) {
-  const { styleClass, datas, columns, title } = props;
+  const { styleClass, datas, columns, title, type } = props;
   const [currentPage, setCurrentPage] = React.useState(1);
   const totalNumber = datas.length;
 
@@ -48,10 +48,11 @@ export default function DataTableV1(props) {
     };
   }, []);
 
-  function buttonEffect(index) {
-    console.log(index);
+  function buttonEffect(ID) {
+    const editUrl = `/${type}-edit/${ID}`;
+    window.location.href = editUrl;
   }
-  // -------
+  // -------------------------------------------------------------------------
   return (
     <div ref={tableRef} className="w-full p-10 pt-0">
       <div className="border border-[#B3A492] rounded-md">
@@ -90,7 +91,7 @@ export default function DataTableV1(props) {
                         );
                       }
                     })}
-                    <td className="absolute right-0 top-[6px]">
+                    <td className="absolute right-1 top-[6px]">
                       <button
                         className="relative"
                         onClick={(e) => {
@@ -101,10 +102,10 @@ export default function DataTableV1(props) {
                         <img src={moreIcon} alt="" />
                         {expandedRowIndex === index && (
                           <span
-                            className="absolute top-[-24px] left-[50%] transform translate-x-[-50%] bg-white px-2 py-1 border rounded w-32"
+                            className="absolute top-[-4px] left-[7rem] transform translate-x-[-50%] bg-[#5272F2] px-3 py-1 border rounded w-[10rem] text-white"
                             onClick={() => buttonEffect(index + 1)}
                           >
-                            자세히 보기
+                            자세히 보기 / 수정
                           </span>
                         )}
                       </button>
@@ -181,4 +182,5 @@ DataTableV1.propTypes = {
   datas: PropTypes.array,
   styleClass: PropTypes.string,
   columns: PropTypes.array.isRequired,
+  type: PropTypes.string.isRequired,
 };

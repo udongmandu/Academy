@@ -18,7 +18,15 @@ export default function BasicBox({ children }) {
 
   //페이지 타이틀과 페이지 명 가져오기
   const location = useLocation();
-  const targetPath = location.pathname;
+  const URL = location.pathname;
+  var modifiedUrls = () => {
+    var parts = URL.split("/");
+    if (parts.length > 2) {
+      parts.splice(2, 1);
+    }
+    return parts.join("/");
+  };
+  const targetPath = modifiedUrls();
   let foundMenu = null;
   sideMenus.forEach((menuGroup) => {
     menuGroup.menus.forEach((menu) => {
