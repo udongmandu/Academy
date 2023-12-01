@@ -58,7 +58,12 @@ export default function MainPage() {
     <>
       <BasicBox>
         <SearchBox onSubmit={setSearch} option={"student"}></SearchBox>
-        <DataTableV1 title={"학생관리 테이블"} columns={columns} datas={data} />
+        <DataTableV1
+          title={"학생관리 테이블"}
+          columns={columns}
+          datas={data}
+          type="student"
+        />
       </BasicBox>
     </>
   );

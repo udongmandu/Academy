@@ -1,12 +1,9 @@
 import React from "react";
 import Button from "../../Components/ButtonTop";
-import PropTypes from "prop-types";
 
-export default function LoginPage(props) {
-  const { login, user } = props;
-  console.log(user);
-
+export default function LoginPage() {
   function loging(e) {
+    //로그인 체크 기능 없음
     e.preventDefault();
     const inputID = e.target.elements.ID.value;
     // const inputPW = e.target.elements.PASSWORD.value;
@@ -15,7 +12,7 @@ export default function LoginPage(props) {
     const userData = { name: inputID, author: "admin" };
     localStorage.setItem("user", JSON.stringify(userData));
 
-    window.location.href = "/";
+    window.location.href = "/student";
   }
 
   return (
@@ -28,7 +25,7 @@ export default function LoginPage(props) {
             <Button
               label={"X"}
               width={50}
-              URL={"/"}
+              URL={"/student"}
               bgColor={"5272F2"}
             ></Button>
           </div>
