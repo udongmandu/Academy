@@ -31,11 +31,16 @@ export default function Topbar() {
         />
       </div>
       {!user ? (
-        <Button
-          URL="/sign-in"
-          label="로그인"
-          styleClass={"w-28 h-11 border-[3px] rounded-lg fontA text-ms"}
-        />
+        <div className="flex items-center gap-5">
+          <div className="font-extrabold text-lg">
+            사용을 위해 로그인을 해주세요.
+          </div>
+          <Button
+            URL="/sign-in"
+            label="로그인"
+            styleClass={"w-28 h-11 border-[3px] rounded-lg fontA text-ms"}
+          />
+        </div>
       ) : (
         <div className="flex items-center gap-5">
           <div className="font-extrabold text-lg">{user.name}</div>
