@@ -8,10 +8,10 @@ import DatePickerV1 from "../datePicker/DatePicker";
 
 export default function SearchBox(props) {
   const today = new Date();
-  const { onSubmit, option } = props;
+  const { onSubmit, option, useDatePicker } = props;
   const [searchOption, setSearchOption] = useState("name");
-  const [startDate, setStartDate] = useState(today);
-  const [endDate, setEndDate] = useState(today);
+  const [startDate, setStartDate] = useState(useDatePicker ? today : null);
+  const [endDate, setEndDate] = useState(useDatePicker ? today : null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,16 +66,20 @@ export default function SearchBox(props) {
           </div>
           <div className="mt-3 flex justify-end items-center gap-3 w-full">
             <div className="flex justify-center w-full h-full items-center">
-              <span className="fontA text-lg">날짜 : </span>
-              <DatePickerV1
-                selected={startDate}
-                onChange={(e) => setStartDate(e)}
-              />
-              <span className="px-10">~</span>
-              <DatePickerV1
-                selected={endDate}
-                onChange={(e) => setEndDate(e)}
-              />
+              {useDatePicker ? (
+                <>
+                  <span className="fontA text-lg">날짜 : </span>
+                  <DatePickerV1
+                    selected={startDate}
+                    onChange={(e) => setStartDate(e)}
+                  />
+                  <span className="px-10">~</span>
+                  <DatePickerV1
+                    selected={endDate}
+                    onChange={(e) => setEndDate(e)}
+                  />
+                </>
+              ) : null}
             </div>
             <button className="text-xs w-16 h-10 px-2 rounded-md border bg-[#5272F2] text-white">
               검색
@@ -93,4 +97,9 @@ export default function SearchBox(props) {
 SearchBox.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   option: PropTypes.string,
+  useDatePicker: PropTypes.bool,
+};
+
+SearchBox.defaultProps = {
+  useDatePicker: false,
 };
