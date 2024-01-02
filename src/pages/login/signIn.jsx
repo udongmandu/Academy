@@ -20,7 +20,7 @@ export default function LoginPage() {
       <div className="absolute w-[100vw] h-[100vh] top-0 left-0 bg-black opacity-50" />
       <div className="absolute w-[100vw] h-[100vh] top-0 left-0 flex justify-center items-center">
         <div className="w-[450px] h-80 bg-white rounded-lg shadow-2xl">
-          <div className="flex justify-between pt-2 pr-2">
+          <div className="flex justify-between pt-4 pr-4">
             <span className="fontA text-3xl pl-9 pt-2">로그인</span>
             <Button
               label={"X"}
