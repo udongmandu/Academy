@@ -1,9 +1,10 @@
+import React from "react";
 import DataTableV1 from "../../Components/dataTableV1/DataTableV1";
 import SearchBox from "../../Components/searchBox/SearchBox";
 import { useState } from "react";
 import BasicBox from "../../Components/manage-box/BasicBox";
 
-export default function Product() {
+export default function MainPageTeacher() {
   const [search, setSearch] = useState({
     text: "",
     option: "student",
@@ -26,6 +27,31 @@ export default function Product() {
     { name: "hello" },
     { name: "hello" },
     { name: "hello" },
+    { name: "hello", hi: "hi" },
+    { name: "hellasdfasfsdfo" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello", hi: "hi" },
+    { name: "hellasdfasfsdfo" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello", hi: "hi" },
+    { name: "hellasdfasfsdfo" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello", hi: "hi" },
+    { name: "hellasdfasfsdfo" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello", hi: "hi" },
+    { name: "hellasdfasfsdfo" },
+    { name: "hello" },
+    { name: "hello" },
+    { name: "hello" },
   ];
 
   return (
@@ -33,9 +59,10 @@ export default function Product() {
       <BasicBox>
         <SearchBox onSubmit={setSearch} option={"student"}></SearchBox>
         <DataTableV1
-          title={"학생관리 테이블2"}
+          title={"학생관리 테이블"}
           columns={columns}
           datas={data}
+          type="student"
         />
       </BasicBox>
     </>
