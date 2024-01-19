@@ -1,13 +1,43 @@
 import React from "react";
 import axios from "axios";
 import Button from "../../Components/ButtonTop";
-import { Toast, notify } from "../../template/Toastify";
 
 export default function LoginPage() {
   async function loging(e) {
     e.preventDefault();
     const inputID = e.target.elements.ID.value;
     const inputPW = e.target.elements.PASSWORD.value;
+
+    try {
+      const response = await axios.post("http://localhost:5002/login", {
+        username: inputID,
+        password: inputPW,
+      });
+      console.log(response);
+
+      if (response.data.success) {
+        const userData = { name: inputID, author: "admin" };
+        localStorage.setItem("user", JSON.stringify(userData));
+        alert("로그인 성공");
+        window.location.href = "/student";
+      } else {
+        alert("로그인 실패: " + response.data.message);
+      }
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        alert("로그인 실패: " + error.response.data.message);
+      } else if (error.request) {
+        console.log(error.request);
+        alert("서버로부터 응답이 없습니다: " + error.message);
+      } else {
+        console.log("Error", error.message);
+        alert("로그인 오류: " + error.message);
+      }
+      console.log(error.config);
+    }
   }
 
   return (
@@ -54,7 +84,6 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
-      <Toast />
     </>
   );
 }
